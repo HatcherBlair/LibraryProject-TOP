@@ -33,8 +33,8 @@ function updateBookCards() {
     bookContainer.innerHTML = '';
 
     // Create a book card and add it to container
-    myLibrary.forEach(book => {
-        bookCard = makeBookCard(book);
+    myLibrary.forEach((book, i) => {
+        bookCard = makeBookCard(book, i);
 
         // Add card to bookContainer
         bookContainer.appendChild(bookCard);
@@ -42,24 +42,44 @@ function updateBookCards() {
 }
 
 // Creates HTML elements and returns a completed bookCard
-function makeBookCard(book) {
+function makeBookCard(book, i) {
     // Create the elements
     const bookCard = document.createElement('div');
+    bookCard.classList.add('book-card');
     const title = document.createElement('p');
     const author = document.createElement('p');
     const numPages = document.createElement('p');
+    const libraryIndex = document.createElement('p');
+
+    // Store the index in the card and make a nice visual
+    libraryIndex.classList.add('card-index');
+    libraryIndex.textContent = i + 1;
+
+    // Creating button elements
+    const btnContainer = document.createElement('div');
+    btnContainer.classList.add('btn-container');
     const read = makeReadBtn(book);
+    const removeBookBtn = document.createElement('button');
+    removeBookBtn.style.backgroundColor = '#e74c3c';
+    removeBookBtn.textContent = 'Remove From Library';
+    removeBookBtn.addEventListener('click', () => {
+        myLibrary.splice(i, 1);
+        updateBookCards();
+    });
+    btnContainer.appendChild(read);
+    btnContainer.appendChild(removeBookBtn);
 
     // Add content to elements
     title.textContent = `Title: ${book.title}`;
     author.textContent = `Author: ${book.author}`;
     numPages.textContent = `Number of pages: ${book.numPages}`;
 
-    // Add children and classes to bookCard
+    // Add children to bookCard
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(numPages);
-    bookCard.appendChild(read);
+    bookCard.appendChild(btnContainer);
+    bookCard.appendChild(libraryIndex);
 
     return bookCard;
 }
@@ -70,10 +90,10 @@ function makeReadBtn(book) {
 
     if (book.read) {
         read.textContent = "Already Read";
-        read.style.backgroundColor = "green";
+        read.style.backgroundColor = "#27ae60";
     } else {
         read.textContent = "Haven't Read Yet";
-        read.style.backgroundColor = "red";
+        read.style.backgroundColor = "#e74c3c";
     }
 
     read.addEventListener('click', () => {

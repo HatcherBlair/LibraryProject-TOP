@@ -1,24 +1,79 @@
+:root {
+    --back: #1a1a1a;
+    --alt-back: #262626;
+    --text: #fff;
+    --alt-text: #bdc3c7;
+    --accent: #3498db;
+    --border: #2c3e50;
+    --green: #27ae60;
+    --red: #e74c3c;
+}
+
+body {
+    background-color: var(--back);
+    color: var(--text);
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h3 {
+    color: var(--alt-text);
+}
 .header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     padding: 0px 2vw 0px;
+    border-bottom: 3px solid var(--border);
 }
 
 .book-container {
+    margin: 5vh 3vw 5vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 5px;
 }
 
-.book-container > * {
+.book-card {
+    position: relative;
     text-align: center;
-    border: 2px solid lightgray;
+    border: 5px solid var(--border);
+    background-color: var(--alt-back);
     border-radius: 5px;
+}
+
+.card-index {
+    position: absolute;
+    left: 10px;
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    border: 1px solid var(--border);
 }
 
 .book-container button {
     margin-bottom: 10px;
+    padding: 10px;
+    width: 40%;
+    height: auto;
+    border: 2px solid var(--border);
+    border-radius: 5%;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.add-book {
+    background-color: var(--accent);
+    width: 200px;
+    height: 100px;
+    font-size: 24pt;
+    color: var(--alt-text);
 }
 
 .form-container {
@@ -34,7 +89,8 @@
     right: 35vw;
     top: 50vh;
     bottom: 20vh;
-    border: 5px solid gray;
+    border: 5px solid var(--border);
+    background-color: var(--alt-back);
 }
 
 .form-row {
@@ -45,10 +101,17 @@
 
 input {
     margin-right: 10px;
+    background-color: var(--accent);
+    color: var(--text);
+}
+
+::placeholder {
+    color: var(--alt-text);
 }
 
 .form-row button {
     margin: 0px 10px 0px;
+    background-color: var(--accent);
 }
 
 .form-row > * {
@@ -57,4 +120,16 @@ input {
 
 .hidden {
     display: none;
+}
+
+.footer {
+    margin-top: auto;
+    align-self: center;
+    padding-top: 2vh;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin-bottom: auto;
 }
